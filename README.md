@@ -1,8 +1,10 @@
 # BigData - TMA4851
 
 
-### Prereq
-Make sure you have support for python, pip and and your favorite virtual environment (see [here](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/) for more details)
+### Prerequisite
+Make sure you have support for python, pip and and your favorite virtual environment (see [here](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/) for more details)   
+
+
 ### Installation
 ```bash
 # Create and activate your environment
