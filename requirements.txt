@@ -1,0 +1,4 @@
+notebook
+pytrends
+matplotlib
+tqdm
