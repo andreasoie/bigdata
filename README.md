@@ -16,3 +16,11 @@ virtualenv venv
 # Install modules from the req file
 pip install -r requirements.txt
 ```
+
+### Data Logic
+
+1. Opprett keyword(s?), timeframe, (threshold?)
+2. Send til trending_all_countries => liste med aktuelle land (per keyword?)
+3. Bruk landnavn med countries.txt for å få landkoder
+5. Opprett aktuelle timeframes (på 6 måneder)
+4. Send landkoder og keyword(s) til get_trending_data
