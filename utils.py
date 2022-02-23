@@ -24,8 +24,8 @@ def _load_unavailable_countries(filename: str):
 def check_is_valid_indexing(n_samples: int):
     """ checks if the number of sampels provides sensible indexing """
     if n_samples < 0:
-        raise ValueError("n_samples can't be negative")
-    elif n_samples == 1:
-        raise ValueError("n_samples can't be 1")
+        raise ValueError("Number of countries can't be negative")
+    elif n_samples > 250:
+        raise ValueError("Doesn't exist so many countries?")
     else:
         return True
