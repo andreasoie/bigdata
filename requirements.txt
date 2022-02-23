@@ -1,4 +1,6 @@
 notebook
 pytrends
 matplotlib
+scikit-learn
+seaborn
 tqdm

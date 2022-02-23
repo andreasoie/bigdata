@@ -1,0 +1,13 @@
+
+Interest Over Time: This method will return historical data of the searched keyword from Google Trend according to the timeframe you have specified in the ‘build_payload’ method.
+Historical Hourly Interest: To get the hourly interest of the keyword, you can use the get_historical_interset() method to fetch hourly data according to the time you have specified.
+
+Interest By Region: The method intrest_by_region from pytrends can show you which countries search the keyword you selected on a scale of 0 to 100, where 100 represents a country with the most search and 0 represents a country that does not have enough data.
+
+Related Topics: Pytrends can find words that are closely tied to a primary keyword of your choice and then return a list of related keywords on Google Trends.
+
+Related Queries: Will return related searches that correspond to your topic/keyword.
+
+Trending Searches: Will return trending searches in real-time for the geographical location.
+
+Suggestions: Google Trends can give you a list of keyword suggestions related to your primary keyword.
