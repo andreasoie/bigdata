@@ -1,5 +1,6 @@
 import random
-from typerhints import CountryList, StringList, Countries
+from matplotlib import pyplot as plt
+from typerhints import CountryList, StringList, Countries, SearchTerm
 
 def load_countries(filename: str, ignore: str) -> CountryList:
     unavailable_countries = _load_unavailable_countries(ignore)
@@ -23,6 +24,17 @@ def _load_unavailable_countries(filename: str) -> StringList:
             line = line.strip()
             unavailable_countries.append(line)
     return unavailable_countries
+
+def plot_history(history: list, search_terms: SearchTerm) -> None:
+    for search_term in search_terms:
+        plt.figure()
+        for hist in history:
+            plt.plot(hist[1][search_term], label=hist[0])
+        plt.legend(loc='upper right')
+        plt.xlabel("Date")
+        plt.ylabel("Interest")
+        plt.title(f"{search_term.capitalize()}: Interest Over Time")
+    plt.show()
 
 def get_sampled_countries(countries: Countries, country_names: CountryList) -> CountryList:
     if isinstance(countries, int):
