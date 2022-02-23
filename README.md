@@ -17,6 +17,9 @@ virtualenv venv
 pip install -r requirements.txt
 ```
 
+### Testing
+Please checkout *development.ipynb* for more information.
+
 ### Data Logic
 
 1. Opprett keyword(s?), timeframe, threshold
