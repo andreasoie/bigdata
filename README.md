@@ -1,10 +1,6 @@
 # BigData - TMA4851
 
-
-### Prerequisite
-Make sure you have support for python, pip and and your favorite virtual environment (see [here](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/) for more details)   
-
-### Ideas for End-to-End pipline
+## Ideas for End-to-End pipline
 - [ ] create suggestion to mini-thesis 
 - [ ] setup query parameters and how to store data (sqlite? csv? json?)
 - [ ] gather, process, and save relevant data
@@ -13,6 +9,11 @@ Make sure you have support for python, pip and and your favorite virtual environ
 - [ ] setup final vizualization (plotly, geopandas .. etc)
 
 ### Installation
+
+#### Prerequisite
+Make sure you have support for python, pip and and your favorite virtual environment (see [here](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/) for more details)   
+
+
 ```bash
 # Create and activate your environment
 virtualenv venv
