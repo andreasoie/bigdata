@@ -4,6 +4,13 @@
 ### Prerequisite
 Make sure you have support for python, pip and and your favorite virtual environment (see [here](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/) for more details)   
 
+### Ideas for End-to-End pipline
+- [] create suggestion to mini-thesis 
+- [] setup query parameters and how to store data (sqlite? csv? json?)
+- [] gather, process, and save relevant data
+- [] vizualize and preprocess data (pandas)
+- [] create cluster classifier (knn .. etc)
+- [] setup final vizualization (plotly, geopandas .. etc)
 
 ### Installation
 ```bash
@@ -17,7 +24,7 @@ virtualenv venv
 pip install -r requirements.txt
 ```
 
-### Testing
+### Demonstration
 Please checkout *development.ipynb* for more information.
 
 ### Data Logic
