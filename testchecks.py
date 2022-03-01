@@ -1,7 +1,7 @@
 from typerhints import CountryList, StringList, Countries
 from utils import load_countries
 
-def check_if_valid_country_query(countries: Countries, country_names: CountryList) -> bool:
+def is_valid_country_query(countries: Countries, country_names: CountryList) -> bool:
     if isinstance(countries, int):
         if countries < 0:
             raise ValueError("Number of countries can't be negative")

@@ -6,7 +6,7 @@ from tqdm import tqdm
 
 # Local imports
 from utils import get_sampled_countries
-from testchecks import check_if_valid_country_query
+from testchecks import is_valid_country_query
 from typerhints import CountryList, Countries, SearchTerm, HistoryFrame, HistoryFrameBlocks
 
 
@@ -15,10 +15,10 @@ class SearchEngine:
         self.pytrends = pytrends
         self.supported_countries = supported_countries
         self.fetch_interval = fetch_interval
-    
+
     def get_daily_trends_by_year(self, search_terms: SearchTerm, year: int, countries: Countries) -> HistoryFrameBlocks:
         # check if illegal query
-        if not check_if_valid_country_query(countries=countries, country_names=self.supported_countries):
+        if not is_valid_country_query(countries=countries, country_names=self.supported_countries):
             raise ValueError("Illegal query")
 
         # Find countries either by specific countries or random sampling by indicies
@@ -29,8 +29,8 @@ class SearchEngine:
             try:
                 history = self._get_yearly_interest_by_country(search_terms, year, geocode)
                 trends.append((country, history))
-            except ValueError as ve: 
-                print(ve) 
+            except ValueError as ve:
+                print(ve)
         return trends
     
     def _get_interest_over_time(self, search_terms: SearchTerm, tf: str, geocode: str) -> HistoryFrame:

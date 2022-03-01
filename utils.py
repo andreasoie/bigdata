@@ -1,6 +1,7 @@
 import random
+import pandas as pd
 from matplotlib import pyplot as plt
-from typerhints import CountryList, StringList, Countries, SearchTerm
+from typerhints import CountryList, StringList, Countries, SearchTerm, HistoryFrameBlocks
 
 def load_countries(filename: str, ignore: str) -> CountryList:
     unavailable_countries = _load_unavailable_countries(ignore)
@@ -35,6 +36,7 @@ def plot_history(history: list, search_terms: SearchTerm) -> None:
         plt.ylabel("Interest")
         plt.title(f"{search_term.capitalize()}: Interest Over Time")
     plt.show()
+    
 
 def get_sampled_countries(countries: Countries, country_names: CountryList) -> CountryList:
     if isinstance(countries, int):
@@ -48,7 +50,6 @@ def get_sampled_countries(countries: Countries, country_names: CountryList) -> C
         return _selected_countries(countries, country_names)
 
 def _selected_countries(selected_countries: StringList, country_options: CountryList) -> CountryList:
-    # @TODO: refactor
     
     # just lower all characters to simplicity
     selected_countries = [search_country.lower() for search_country in selected_countries]
@@ -66,4 +67,12 @@ def _selected_countries(selected_countries: StringList, country_options: Country
             my_selected_countries.append(new_country)
     return my_selected_countries
 
-
+def histories_to_pandas(histories: HistoryFrameBlocks) -> pd.DataFrame:
+    if isinstance(histories, pd.DataFrame):
+        return histories
+    blocks = []
+    for country_name, country_data in histories:
+        country_data["country"] = country_name
+        country_data.reset_index(inplace=True)
+        blocks.append(country_data)
+    return pd.concat(blocks)
