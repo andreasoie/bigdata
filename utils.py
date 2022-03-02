@@ -1,7 +1,7 @@
 import random
 import pandas as pd
 from matplotlib import pyplot as plt
-from typerhints import CountryList, StringList, Countries, SearchTerm, HistoryFrameBlocks
+from typerhints import CountryList, HistoryFrame, StringList, Countries, SearchTerm, HistoryFrameBlocks
 
 def load_countries(filename: str, ignore: str) -> CountryList:
     unavailable_countries = _load_unavailable_countries(ignore)
@@ -76,3 +76,6 @@ def histories_to_pandas(histories: HistoryFrameBlocks) -> pd.DataFrame:
         country_data.reset_index(inplace=True)
         blocks.append(country_data)
     return pd.concat(blocks)
+
+def is_leap_year(year: int) -> bool:
+    return (year % 4 == 0 and year % 100 != 0) or year % 400 == 0
