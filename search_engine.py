@@ -62,10 +62,8 @@ class SearchEngine:
             history_frame = self._get_interest_over_time(search_terms, time_period, geocode)
             tmp_history.append(history_frame)
 
-
         # with rescaling
         combined_history = self._get_rescaled_history(search_terms, tmp_history, time_periods, geocode)
-
 
         assert combined_history.shape[0] == expected_days, f"Expected {expected_days}, not {combined_history.shape[0]} days in a year!"
         return combined_history
