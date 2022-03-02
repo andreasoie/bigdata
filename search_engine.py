@@ -65,11 +65,9 @@ class SearchEngine:
 
         # with rescaling
         combined_history = self._get_rescaled_history(search_terms, tmp_history, time_periods, geocode)
-        
-        # without rescaling
-        #combined_history = pd.concat(tmp_history)
 
-        assert combined_history.shape[0] == expected_days, f"Expected {expected_days} days in a year!"
+
+        assert combined_history.shape[0] == expected_days, f"Expected {expected_days}, not {combined_history.shape[0]} days in a year!"
         return combined_history
 
     def _get_rescaled_history(self, search_terms, full_history, time_periods, geocode):
@@ -115,6 +113,10 @@ class SearchEngine:
 
         # merge both halfs 
         full_year_history = pd.concat([first_half_of_year, second_half_of_year])
+
+        # scale full_year_history
+        m = 100/full_year_history[search_terms[0]].max()
+        full_year_history = full_year_history.mul(m, axis=0)
 
         return full_year_history
 
