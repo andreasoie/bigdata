@@ -8,14 +8,12 @@ from tqdm import tqdm
 from utils import get_sampled_countries, is_leap_year
 from testchecks import is_valid_country_query
 from typerhints import CountryList, Countries, SearchTerm, HistoryFrame, HistoryFrameBlocks
-from sklearn.preprocessing import MinMaxScaler
 
 class SearchEngine:
     def __init__(self, pytrends: TrendReq, supported_countries: CountryList, fetch_interval: int = 1):
         self.pytrends = pytrends
         self.supported_countries = supported_countries
         self.fetch_interval = fetch_interval
-        self.scaler = MinMaxScaler(feature_range=(0, 100))
 
     def get_daily_trends_by_year(self, search_terms: SearchTerm, year: int, countries: Countries) -> HistoryFrameBlocks:
         # check if illegal query
@@ -62,8 +60,14 @@ class SearchEngine:
             history_frame = self._get_interest_over_time(search_terms, time_period, geocode)
             tmp_history.append(history_frame)
 
-        # with rescaling
-        combined_history = self._get_rescaled_history(search_terms, tmp_history, time_periods, geocode)
+
+        use_recscale = False
+
+        if use_recscale:
+            combined_history = self._get_rescaled_history(search_terms, tmp_history, time_periods, geocode)
+        else:
+            combined_history = pd.concat(tmp_history)
+
 
         assert combined_history.shape[0] == expected_days, f"Expected {expected_days}, not {combined_history.shape[0]} days in a year!"
         return combined_history
