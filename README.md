@@ -14,6 +14,11 @@
 Make sure you have support for python, pip and and your favorite virtual environment (see [here](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/) for more details)   
 
 
+#### Changes
+- Moving from pip to conda, as most mapping vizualization libraries are badly supported with windows / pip-
+- BaseMap: https://rabernat.github.io/research_computing/intro-to-basemap.html
+- Conda: ....
+
 ```bash
 # Create and activate your environment
 virtualenv venv
