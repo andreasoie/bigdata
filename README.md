@@ -4,37 +4,24 @@
 
 - [ ] create suggestion to mini-thesis
 - [ ] setup query parameters and how to store data (sqlite? csv? json?)
-- [ ] gather, process, and save relevant data
+- [x] gather, process, and save relevant data
 - [ ] vizualize and preprocess data (pandas)
 - [ ] create cluster classifier (knn .. etc)
 - [ ] setup final vizualization (plotly, geopandas .. etc)
 
 ### Installation
 
-#### Prerequisite
-
-Make sure you have support for python, pip and and your favorite virtual environment (see [here](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/) for more details)
-
-#### Changes
-
-- Moving from pip to conda, as most mapping vizualization libraries are badly supported with windows / pip-
-- BaseMap: https://rabernat.github.io/research_computing/intro-to-basemap.html
-- Conda: ....
-
 ```bash
 # Create and activate your environment
+pip install virtualenv
 virtualenv venv
 .\venv\Scripts\activate
-```
-
-```bash
-# Install modules from the req file
 pip install -r requirements.txt
 ```
 
 ### Demonstration
 
-Please checkout _development.ipynb_ for more information.
+Please checkout demo.ipynb for more information.
 
 ### Data Logic
 
