@@ -13,7 +13,7 @@ SEARCH_TERMS_3 = [
     "Donald Trump",
     "Brexit",
     "ISIS",
-    "al-Qaida",
+    "al-Qaeda",
 ]
 
 SEARCH_TERMS_4 = [
