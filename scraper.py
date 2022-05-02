@@ -8,7 +8,7 @@ import requests
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
 import pandas as pd
-from seach_countries import mylist as selected_countries
+from search_countries import mylist as selected_countries
 from pytrends.request import TrendReq
 
 from search_engine import SearchEngine
