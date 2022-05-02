@@ -6,3 +6,4 @@ seaborn
 tqdm
 typing
 tslearn
+networkx
