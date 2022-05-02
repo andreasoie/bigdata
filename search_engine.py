@@ -3,6 +3,7 @@ import time
 import pandas as pd
 from pytrends.request import TrendReq
 from tqdm import tqdm
+from datetime import date
 
 from testchecks import is_valid_country_query
 from typerhints import (
@@ -46,7 +47,9 @@ class SearchEngine:
 
         trends = []
         for geocode, country in tqdm(
-            search_countries, desc=f"Fetching trends for {year}", colour="green"
+            search_countries,
+            desc=f"[{year}] Fetching {search_terms[0]}",
+            colour="green",
         ):
             try:
                 history = self._get_yearly_interest_by_country(
@@ -60,7 +63,6 @@ class SearchEngine:
     def _get_interest_over_time(
         self, search_terms: SearchTerm, tf: str, geocode: str
     ) -> HistoryFrame:
-        current_year = int(tf.split(" ")[0][:4])
         # don't fetch too often I guess?
         time.sleep(self.fetch_interval)
         # create the payload for related queries
@@ -68,11 +70,35 @@ class SearchEngine:
         # request data from dataframe
         payload = self.pytrends.interest_over_time()
         if payload.empty:
+            payloadd = self.create_empty_payload(tf, search_terms)
+            print("Empty payload {payload}, but created: ", payloadd.shape)
             raise ValueError(
-                f"[ERROR] Geocode: {geocode} Year {current_year}: \
+                f"[ERROR] Geocode: {geocode}: \
                 empty payload for terms {search_terms}"
             )
-        return payload.drop(columns=["isPartial"])
+        return payload.drop(columns="isPartial")
+
+    def create_empty_payload(self, timeframe: str, search_terms: SearchTerm):
+        # timeframe e.g.: 2010-7-1 2010-12-31
+        first_half = timeframe.split(" ")[0]
+        second_half = timeframe.split(" ")[1]
+        current_year = int(first_half.split("-")[0])
+
+        first_day = int(first_half.split("-")[2])
+        first_month = int(first_half.split("-")[1])
+        last_day = int(second_half.split("-")[2])
+        last_month = int(second_half.split("-")[1])
+
+        first_date = date(current_year, first_month, first_day)
+        last_date = date(current_year, last_month, last_day)
+        date_changes = first_date - last_date
+        n_day = date_changes.days + 1  # add 1 to include last day
+        empty_payload = pd.DataFrame(
+            data=None,
+            index=pd.date_range(start=first_date, periods=n_day, freq="D"),
+            columns=search_terms,
+        )
+        return empty_payload
 
     def _get_yearly_interest_by_country(
         self,

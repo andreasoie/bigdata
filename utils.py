@@ -1,4 +1,5 @@
 import random
+from typing import List
 
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -14,15 +15,13 @@ from typerhints import (
 
 
 def load_merge_save_csv(filename: str, data: pd.DataFrame) -> None:
-    # loaded_data = pd.read_csv(filename)
-    # loaded_data
-    # loaded_data["date"] = pd.to_datetime(loaded_data["date"])
-    # loaded_data.sort_values(by="date", inplace=True)
-    # loaded_data.to_csv(filename, index=False, date_format="%Y-%m-%d")
     loaded_data = pd.read_csv(filename)
-    filedata = pd.concat([loaded_data, data])
+    cat1 = loaded_data.reset_index(drop=True)
+    cat2 = data.reset_index(drop=True)
+    filedata = pd.concat([cat1, cat2])
     filedata["date"] = pd.to_datetime(filedata["date"])
     filedata.sort_values(by="date", inplace=True)
+    filedata.dropna()
     filedata.to_csv(filename, index=False, date_format="%Y-%m-%d")
 
 
@@ -81,7 +80,6 @@ def _selected_countries(
     selected_countries: StringList, country_options: CountryList
 ) -> CountryList:
 
-    # just lower all characters to simplicity
     selected_countries = [
         search_country.lower() for search_country in selected_countries
     ]
@@ -109,6 +107,21 @@ def histories_to_pandas(histories: HistoryFrameBlocks) -> pd.DataFrame:
         country_data.reset_index(inplace=True)
         blocks.append(country_data)
     return pd.concat(blocks)
+
+
+def merge_dataframes(frame_list: List[pd.DataFrame]) -> pd.DataFrame:
+    if not isinstance(frame_list, list):
+        raise TypeError("frame_list must be a list")
+    if not len(frame_list):
+        raise ValueError("frame_list must not be empty")
+
+    dataframe = frame_list[0]
+    for frame in frame_list:
+        processed_frame = frame.reset_index(drop=True)
+        dataframe = pd.merge(dataframe, processed_frame)
+        dataframe.sort_values(by="date").reset_index(drop=True, inplace=True)
+    sorted_dataframe = dataframe.sort_values(by="date").reset_index(drop=True)
+    return sorted_dataframe
 
 
 def is_leap_year(year: int) -> bool:
